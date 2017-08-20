@@ -1,0 +1,140 @@
+【Git】
+****************************************************************
+Git 简介
+****************************************************************
+    - 目前世界上最先进的分布式版本控制系统（没有之一）。
+    - 特性：
+        1. 文件历史版本
+        2. 文件修改版本合并
+        3. 记录改动
+· 诞生
+    - Linux创始人为了做版本管理，有了Git
+· 集中式vs分布式
+    
+· Git 安装
+    - linux
+       $ sudo apt-get install git
+    - Max OS X
+        方法一：用homebrew http://brew.sh/
+        方法二：从AppStore安装Xcode
+    - Windows
+        下载msysgit ： https://git-for-windows.github.io
+        安装菜单：git>Git Bash, 命令行
+        $ git config --global user.name "Your Name"
+        $ git config --global user.email "email@example.com"
+
+· 创建版本库repository
+    1. 创建q目录
+    2. 
+        $ git init
+        Initialized empty Git repository in /Users/michael/learngit/.git/
+    3. 会出现一个隐藏的.git目录. 用ls -ah 查看
+    4. 把文件添加到版本库
+        在repo目录下：
+        $ git add readme.txt    //添加readme文件
+        $ git commit -m "wrote a readme file"       // 提交， -m 后为提交说明
+
+    * windows 千万别使用自带的记事本编辑文件。 请使用Notepad++，并把默认编码设置为UTF-8 without BOM
+        https://notepad-plus-plus.org/
+
+****************************************************************
+版本控制
+****************************************************************
+· 时光机穿梭
+     $ git status   // 获取版本库当前状态（增删改等等）
+     $ git diff readme.txt  // 查看制定文件的改动部分
+     $ git add readme.txt   
+     $ git commit -m 'version comments here'
+
+· 版本回退
+    $ git log   //查看历史记录
+    $ git log --pretty=oneline      // commit id
+
+    - 在Git中，用HEAD表示当前版本，也就是最新的提交3628164...882e1e0（注意我的提交ID和你的肯定不一样），上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+
+    $ git reset --hard HEAD^        // 退回到第一个版本
+    $ git reset --hard 88215ef // 什么号,版本号
+
+    $git reflog     //记录你的每一次命令
+【小结】
+    小结
+    现在总结一下：
+    HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+    穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+    要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+
+· 工作区和暂存区
+    - 工作区： 就是你在电脑里能看到的Git目录
+    - 版本库（Repository） 
+        工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
+        - stage（或者叫index）的暂存区
+        - master //我们自动创建的第一个分支Master
+        - 指向Master的指针HEAD
+    - git add 命令实际上就是把要提交的所有修改放到暂存区（Stage）
+    - git commit 就可以一次性把暂存区的所有修改提交到分支。
+
+· 管理修改
+    - Git管理的是修改，而不是文件
+    - 什么是修改：比如你新增了一行，这就是一个修改，删除了一行，也是一个修改，更改了某些字符，也是一个修改，删了一些又加了一些，也是一个修改，甚至创建一个新文件，也算一个修改。
+
+    [小结]
+    理解了Git是如何跟踪修改的，每次修改，如果不add到暂存区，那就不会加入到commit中。
+· 撤销修改
+    $ git checkout -- readme.txt
+
+· 删除文件
+    $ rm test.txt
+    $ git commit -m "remove test.txt"
+    $ git checkout -- test.txt      //误删恢复
+
+
+
+****************************************************************
+远程仓库
+****************************************************************
+ Git账号申请及设置
+    1. 注册GitHub账号 github.com
+    2. $ ssh-keygen -t rsa -C "imliuye@163.com" 
+            // 创建keygen /Users/yeliu/.ssh/id_rsa
+    3. GitHub.com > account setting > SSH Keys > Add SSH Key
+        title 随意，内容为id_rsa.pub
+
+    为啥GitHub 需要Key： 确认是你推送，不是别人冒充。SSH协议，知道了你的公钥，只有你自己才能推送
+
+    GitHub允许你添加多个Key，在不同电脑。
+
+    所有内容公有。除非付费或者自己搭建Git服务器。
+
+· 添加远程库
+    - 右上角+号 > create a new repo > 填写repo name
+    - $ git remote add originLJL git@github.com:imliuye/learngit.git
+        // 关联远程库originLJL随便起， 
+
+    - $ git push -u originLJL master    //本地内容推送到远程
+
+· 从远程库克隆到本地
+    - 要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
+    - Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+
+    1. 在Git Hub 上 创建苦gitskills
+    -$ git clone git@github.com:imliuye/gitskills.git
+
+· 分支管理
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
